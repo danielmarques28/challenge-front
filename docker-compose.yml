@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  front:
+    build: .
+    command: 'yarn serve'
+    image: challenge-front
+    ports:
+    - '8080:8080'
+    volumes:
+    - .:/code
