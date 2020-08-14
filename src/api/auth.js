@@ -1,8 +1,8 @@
-import client from './client';
+import http from './http';
 
 const login = (body) => {
   const endpoint = '/auth/login';
-  return client.post(endpoint, body);
+  return http.post(endpoint, body);
 };
 
 export default { login };

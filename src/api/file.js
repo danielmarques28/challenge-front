@@ -1,19 +1,19 @@
-import client from './client';
+import http from './http';
 
 const listUserFiles = () => {
   const endpoint = '/files';
-  return client.get(endpoint);
+  return http.get(endpoint);
 };
 
 const downloadFile = (id) => {
   const endpoint = `/files/${id}`;
-  return client.get(endpoint);
+  return http.get(endpoint);
 }
 
 const uploadFile = (formData) => {
   const endpoint = '/files';
-  client.defaults.headers['Content-Type'] = 'multipart/form-data';
-  return client.post(endpoint, formData);
+  http.defaults.headers['Content-Type'] = 'multipart/form-data';
+  return http.post(endpoint, formData);
 }
 
 export default { listUserFiles, downloadFile, uploadFile };

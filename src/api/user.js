@@ -1,8 +1,8 @@
-import client from './client';
+import http from './http';
 
 const createUser = (body) => {
   const endpoint = '/users';
-  return client.post(endpoint, body);
+  return http.post(endpoint, body);
 };
 
 export default { createUser };
