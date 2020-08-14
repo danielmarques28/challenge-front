@@ -9,3 +9,5 @@ services:
     - '8080:8080'
     volumes:
     - .:/code
+    environment:
+    - VUE_APP_BASE_URL=http://localhost:3000/api/v1/
