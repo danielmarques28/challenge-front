@@ -35,22 +35,23 @@ export default {
     }
   },
   mounted() {
-    fileAPI.listUserFiles()
+    this.getAllFiles();
+  },
+  methods: {
+    getAllFiles() {
+      fileAPI.listUserFiles()
       .then((response) => {
         this.files = response.data;
       });
-  },
-  methods: {
+    },
     upload(e) {
       const files = e.target.files || e.dataTransfer.files;
       if (!files.length)
         return;
       let formData = new FormData();
-      console.log('files:', files[0]);
-      formData.append('file', files[0]);
       fileAPI.uploadFile(formData)
-        .then((response) => {
-          console.log(response);
+        .then(() => {
+          this.getAllFiles();
         });
     },
     download(fileId, fileName) {
