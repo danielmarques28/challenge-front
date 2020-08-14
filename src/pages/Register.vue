@@ -1,12 +1,21 @@
 <template>
-  <div class="register">
-    <div class="center-div">
-      <div class="image">
-        
+  <background>
+    <div class="register">
+      <div class="top">
+        <div><h1>Registro</h1></div>
+        <div>
+          <router-link to="/login">
+            Deseja fazer login?
+          </router-link>
+        </div>
       </div>
-      <h1>Registro</h1>
       <form method="post">
-        <label for="email">Email:</label>
+        <label
+          class="label"
+          for="password"
+        >
+          Email
+        </label>
         <input
           class="input"
           type="email"
@@ -16,21 +25,33 @@
           v-model="email"
         >
         
-        <label for="password">Senha:</label>
+        <label
+          class="label"
+          for="password"
+        >
+          Senha
+        </label>
         <input
           class="input"
           type="password"
           name="password"
           id="password"
+          placeholder="xxxxxx"
           v-model="password"
         >
 
-        <label for="password">Confirmar senha:</label>
+        <label
+          class="label"
+          for="password"
+        >
+          Confirmar senha
+        </label>
         <input
           class="input"
           type="password"
           name="confirm-password"
           id="confirm-password"
+          placeholder="xxxxxx"
           v-model="confirmPassword"
         >
         
@@ -43,14 +64,18 @@
         </button>
       </form>
     </div>
-  </div>
+  </background>
 </template>
 
 <script>
 import userAPI from '../api/user';
+import background from '../components/Background';
 
 export default {
   name: 'Register',
+  components: {
+    background
+  },
   data() {
     return {
       email: '',
@@ -76,37 +101,44 @@ export default {
 
 <style lang="scss" scoped>
 .register {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-  background: grey;
-  font-size: 0.95rem;
-  .center-div {
-    background: white;
-    width: 20rem;
-    border-radius: 5px;
-    padding: 0.6rem;
-    @media only screen and (max-width: 600px) {
-      width: 17rem;
-    }
-    .image {
-      height: 5rem;
-    }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
     h1 {
-      margin-top: 0;
-      margin-bottom: 1rem;
+      margin: 0;
+      font-weight: normal;
     }
-    form {
-      .input {
-        width: 93.5%;
-        margin-bottom: 1rem;
+  }
+  form {
+    .label {
+      margin-left: 0.25rem;
+    }
+    .input {
+      width: 17.65rem;
+      height: 2.5rem;
+      margin-top: 0.2rem;
+      margin-bottom: 1rem;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 5px;
+      padding: 0 0.5rem;
+      @media only screen and (max-width: 600px) {
+        width: 14.6rem;
       }
-      .btn {
-        width: 100%;
-        margin-top: 1rem;
-      }
+    }
+    .btn {
+      width: 100%;
+      height: 2.5rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #2c68b1;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
     }
   }
 }
