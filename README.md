@@ -1,24 +1,30 @@
-# challenge-front
+# FRONT
 
-## Project setup
-```
-yarn install
-```
+## How to run
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+* Clone this repo in your machine
 
-### Compiles and minifies for production
-```
-yarn build
-```
+* **With Docker**
 
-### Lints and fixes files
-```
-yarn lint
-```
+  * Run front-end in one terminal:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+        $ docker-compose up
+
+* **Or with YARN**
+
+  * Run front-end in one terminal:
+
+        $ yarn install
+        $ yarn serve
+
+* Wait until see this message in the another terminal:
+
+      App running at:
+         - Local:   http://localhost:8080/
+
+* In your browser, access this page http://localhost:8080/login
+
+* (**OPTIONAL**) If you seed the api before, you can sign in with this two credencials:
+
+          email: daniel@gmail.com
+          senha: 123456
