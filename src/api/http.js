@@ -14,19 +14,17 @@ http.interceptors.request.use((config) => {
     config.headers['Authorization'] = `${token}`;
 
   return config;
-}, (error) => {
-  return Promise.reject(error);
 });
 
 http.interceptors.response.use((response) => {
   return response
 }, (error) => {
-  if (error.response.status === 401) {
+  if (error.response && error.response.status === 401) {
     localStorage.removeItem('token');
     window.location.href = '/login';
   }
 
-  return Promise.reject(error);
+  return error.response;
 });
 
 export default http;

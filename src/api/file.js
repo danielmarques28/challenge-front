@@ -16,4 +16,9 @@ const uploadFile = (formData) => {
   return http.post(endpoint, formData);
 }
 
-export default { listUserFiles, downloadFile, uploadFile };
+const deleteFile = (id) => {
+  const endpoint = `/files/${id}`;
+  return http.delete(endpoint);
+}
+
+export default { listUserFiles, downloadFile, uploadFile, deleteFile };
