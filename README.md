@@ -10,13 +10,6 @@
 
         $ docker-compose up
 
-* **Or with YARN**
-
-  * Run front-end in one terminal:
-
-        $ yarn install
-        $ yarn serve
-
 * Wait until see this message in the another terminal:
 
       App running at:
@@ -24,7 +17,7 @@
 
 * In your browser, access this page http://localhost:8080/login
 
-* (**OPTIONAL**) If you seed the api before, you can sign in with this two credencials:
+* (**OPTIONAL**) If you seed the api before, you can sign in with this credencial:
 
           email: daniel@gmail.com
           senha: 123456
