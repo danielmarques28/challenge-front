@@ -9,7 +9,12 @@
           </router-link>
         </div>
       </div>
-      <form method="post">
+      <div v-if="errors.length > 0" class="error">
+        <div v-for="(error, index) in errors" v-bind:key="index">
+          - {{ error }}
+        </div>
+      </div>
+      <form method="post" @submit="checkForm">
         <label
           class="label"
           for="password"
@@ -58,7 +63,6 @@
         <button
           class="btn"
           type="submit"
-          v-on:click="this.register"
         >
           Registrar
         </button>
@@ -80,18 +84,35 @@ export default {
     return {
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      errors: []
     }
   },
   methods: {
-    register(event) {
+    validEmail: function (email) {
+      let re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
+    },
+    checkForm(event) {
       event.preventDefault();
+      this.errors= [];
+      if (!this.validEmail(this.email))
+        this.errors.push('Utilize um e-mail válido');
+      if(!this.password)
+        this.errors.push('Utilize um senha válido');
+      if(!this.confirmPassword)
+        this.errors.push('Confirme a senha');
+      if(this.password !== this.confirmPassword)
+        this.errors.push('Os campos de senha não estão iguais');
+      else if(this.errors.length === 0)
+        this.register();
+    },
+    register() {
       const { email, password } = this;
       const body = { email, password };
       userAPI.createUser(body)
         .then(async (response) => {
           localStorage.token = await response.data.token;
-          console.log('token:', response.data.token);
           this.$router.push({ name: 'Home' });
         });
     }
@@ -110,6 +131,16 @@ export default {
       margin: 0;
       font-weight: normal;
     }
+  }
+  .error {
+    text-align: center;
+    margin-bottom: 0.7rem;
+    padding: 0.5rem 0;
+    background: #ffe3e6;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(158, 28, 35, 0.2);
   }
   form {
     .label {

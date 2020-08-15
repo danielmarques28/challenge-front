@@ -9,7 +9,12 @@
           </router-link>
         </div>
       </div>
-      <form method="post">
+      <div v-if="errors.length > 0" class="error">
+        <div v-for="(error, index) in errors" v-bind:key="index">
+          - {{ error }}
+        </div>
+      </div>
+      <form method="post" @submit="checkForm">
         <label
           class="label"
           for="email"
@@ -43,7 +48,6 @@
         <button
           class="btn"
           type="submit"
-          v-on:click="this.login"
         >
           Login
         </button>
@@ -64,19 +68,27 @@ export default {
   data() {
     return {
       email: '',
-      password: ''
+      password: '',
+      errors: []
     }
   },
   methods: {
-    login(event) {
+    checkForm(event) {
       event.preventDefault();
+      this.errors = [];
+      this.login();
+    },
+    login() {
       const { email, password } = this;
       const body = { email, password };
       authAPI.login(body)
         .then(async (response) => {
-          localStorage.token = await response.data.token;
-          console.log('token:', response.data.token);
-          this.$router.push({ name: 'Home' });
+          if (response.status == 200) {
+            localStorage.token = await response.data.token;
+            this.$router.push({ name: 'Home' });
+          } else if (response.status == 400) {
+            this.errors.push('E-mail ou senha está incorreto');
+          }
         });
     }
   }
@@ -94,6 +106,16 @@ export default {
       margin: 0;
       font-weight: normal;
     }
+  }
+  .error {
+    text-align: center;
+    margin-bottom: 0.7rem;
+    padding: 0.5rem 0;
+    background: #ffe3e6;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgba(158, 28, 35, 0.2);
   }
   form {
     .label {

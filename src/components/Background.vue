@@ -36,7 +36,7 @@ export default {
     overflow: hidden;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     @media only screen and (max-width: 600px) {
-      width: 17rem;
+      width: 17.5rem;
     }
     .image {
       width: 100%;
